@@ -877,7 +877,7 @@ def ai_chat_assistant(df):
         st.markdown("*Powered by Google Gemini AI* 🌟")
         if "gemini_model" not in st.session_state:
             genai.configure(api_key=gemini_key)
-            st.session_state.gemini_model = genai.GenerativeModel('gemini-pro')
+            st.session_state.gemini_model = genai.GenerativeModel('gemini-2.5-flash')
     else:
         st.markdown("*Get instant insights and recommendations powered by AI*")
         if not GEMINI_AVAILABLE:
