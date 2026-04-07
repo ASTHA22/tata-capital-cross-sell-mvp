@@ -8,11 +8,7 @@ venv/
 env/
 ENV/
 
-# Data files
-*.csv
-*.pkl
-
-# Streamlit
+# Streamlit secrets only
 .streamlit/secrets.toml
 
 # IDE

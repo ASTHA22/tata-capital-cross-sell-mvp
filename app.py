@@ -199,11 +199,38 @@ st.markdown("""
 @st.cache_data
 def load_data():
     """Load scored customer data"""
+    import subprocess
+    import sys
+    
+    # Check if scored data exists
+    if not os.path.exists('nbfc_customers_scored.csv'):
+        st.warning("🔄 First-time setup: Generating data and training model... This will take 2-3 minutes.")
+        
+        with st.spinner("Generating synthetic customer data..."):
+            try:
+                # Run generate_data.py
+                subprocess.run([sys.executable, 'generate_data.py'], check=True, capture_output=True)
+                st.success("✅ Data generated!")
+            except subprocess.CalledProcessError as e:
+                st.error(f"❌ Error generating data: {e.stderr.decode()}")
+                st.stop()
+        
+        with st.spinner("Training propensity model..."):
+            try:
+                # Run train_model.py
+                subprocess.run([sys.executable, 'train_model.py'], check=True, capture_output=True)
+                st.success("✅ Model trained!")
+            except subprocess.CalledProcessError as e:
+                st.error(f"❌ Error training model: {e.stderr.decode()}")
+                st.stop()
+        
+        st.success("🎉 Setup complete! Loading dashboard...")
+    
     try:
         df = pd.read_csv('nbfc_customers_scored.csv')
         return df
     except FileNotFoundError:
-        st.error("⚠️ Data file not found. Please run generate_data.py and train_model.py first.")
+        st.error("⚠️ Data file not found even after generation. Please check the logs.")
         st.stop()
 
 def format_currency(amount):
