@@ -24,66 +24,107 @@ st.set_page_config(
 # Custom CSS for dark theme
 st.markdown("""
     <style>
-    /* Tata Capital Brand Colors */
+    /* Tata Capital Official Brand Colors - Light Theme */
     :root {
-        --tata-purple: #8B5CF6;
-        --tata-blue: #3B82F6;
-        --tata-gold: #F59E0B;
-        --dark-bg: #0F172A;
-        --dark-card: #1E293B;
-        --dark-text: #E2E8F0;
+        --tata-blue: #0066CC;
+        --tata-purple: #6B2C91;
+        --tata-gold: #F7A800;
+        --tata-navy: #003366;
+        --tata-green: #00A651;
+        --light-bg: #F8FAFC;
+        --light-card: #FFFFFF;
+        --dark-text: #1E293B;
+        --border-color: #E2E8F0;
     }
     
     /* Main app background */
     .stApp {
-        background-color: #0F172A;
-        color: #E2E8F0;
+        background: linear-gradient(180deg, #F8FAFC 0%, #EFF6FF 100%);
+        color: #1E293B;
     }
     
     /* Main header styling */
     .main-header {
-        background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
-        padding: 2rem;
-        border-radius: 10px;
+        background: linear-gradient(135deg, #003366 0%, #0066CC 50%, #6B2C91 100%);
+        padding: 2.5rem;
+        border-radius: 12px;
         margin-bottom: 2rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 8px 24px rgba(0, 102, 204, 0.2);
+        border: 1px solid rgba(247, 168, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .main-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(247, 168, 0, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
     }
     
     .main-header h1 {
-        color: white;
+        color: #FFFFFF !important;
         font-size: 2.5rem;
         font-weight: 700;
         margin: 0;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
     
+    .main-header h1 * {
+        color: #FFFFFF !important;
+    }
+    
     .main-header p {
-        color: #FCD34D;
+        color: #F7A800 !important;
         font-size: 1.2rem;
         margin: 0.5rem 0 0 0;
-        font-weight: 500;
+        font-weight: 600;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    }
+    
+    .main-header p * {
+        color: #F7A800 !important;
     }
     
     /* Metric cards */
     div[data-testid="stMetricValue"] {
         font-size: 2rem;
         font-weight: 700;
-        color: #8B5CF6;
+        color: #0066CC;
     }
     
     div[data-testid="stMetricLabel"] {
         font-size: 1rem;
         font-weight: 600;
-        color: #94A3B8;
+        color: #64748B;
     }
     
     div[data-testid="stMetricDelta"] {
-        color: #10B981;
+        color: #00A651;
     }
     
     /* Sidebar styling */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
+        background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+        border-right: 2px solid #E2E8F0;
+    }
+    
+    section[data-testid="stSidebar"] .stRadio > label {
+        background: #F8FAFC;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+        border-left: 3px solid transparent;
+        transition: all 0.3s ease;
+    }
+    
+    section[data-testid="stSidebar"] .stRadio > label:hover {
+        background: #EFF6FF;
+        border-left-color: #F7A800;
     }
     
     section[data-testid="stSidebar"] > div {
@@ -92,52 +133,74 @@ st.markdown("""
     
     /* Cards and containers */
     .info-card {
-        background: #1E293B;
+        background: #FFFFFF;
         padding: 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        border-left: 4px solid #8B5CF6;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border-left: 4px solid #0066CC;
+        border: 1px solid #E2E8F0;
         margin-bottom: 1rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .info-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 102, 204, 0.15);
     }
     
     .success-card {
-        background: linear-gradient(135deg, #064E3B 0%, #065F46 100%);
+        background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
         padding: 1.5rem;
-        border-radius: 10px;
-        border-left: 4px solid #10B981;
+        border-radius: 12px;
+        border-left: 4px solid #00A651;
+        border: 1px solid #86EFAC;
         margin: 1rem 0;
+        box-shadow: 0 2px 8px rgba(0, 166, 81, 0.1);
     }
     
     .warning-card {
-        background: linear-gradient(135deg, #78350F 0%, #92400E 100%);
+        background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
         padding: 1.5rem;
-        border-radius: 10px;
-        border-left: 4px solid #F59E0B;
+        border-radius: 12px;
+        border-left: 4px solid #F7A800;
+        border: 1px solid #FCD34D;
         margin: 1rem 0;
+        box-shadow: 0 2px 8px rgba(247, 168, 0, 0.1);
     }
     
     /* Buttons */
     .stButton > button {
-        background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
-        color: white;
+        background: linear-gradient(135deg, #0066CC 0%, #6B2C91 100%) !important;
+        color: #FFFFFF !important;
         border: none;
         border-radius: 8px;
         padding: 0.75rem 2rem;
         font-weight: 600;
         transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+    }
+    
+    .stButton > button * {
+        color: #FFFFFF !important;
     }
     
     .stButton > button:hover {
+        background: linear-gradient(135deg, #0052A3 0%, #561F75 100%) !important;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+        box-shadow: 0 6px 16px rgba(0, 102, 204, 0.5);
+    }
+    
+    .stButton > button:active {
+        transform: translateY(0);
     }
     
     /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 2rem;
-        background-color: #1E293B;
+        gap: 1rem;
+        background-color: #F8FAFC;
         padding: 1rem;
-        border-radius: 10px;
+        border-radius: 12px;
+        border: 1px solid #E2E8F0;
     }
     
     .stTabs [data-baseweb="tab"] {
@@ -145,20 +208,32 @@ st.markdown("""
         font-size: 1rem;
         padding: 0.75rem 1.5rem;
         border-radius: 8px;
-        color: #94A3B8;
+        color: #64748B;
+        transition: all 0.3s ease;
+    }
+    
+    .stTabs [data-baseweb="tab"]:hover {
+        background-color: #EFF6FF;
+        color: #0066CC;
     }
     
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
-        color: white;
+        background: linear-gradient(135deg, #0066CC 0%, #6B2C91 100%) !important;
+        color: #FFFFFF !important;
+        box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+    }
+    
+    .stTabs [aria-selected="true"] * {
+        color: #FFFFFF !important;
     }
     
     /* Dataframe styling */
     .dataframe {
         border-radius: 8px;
         overflow: hidden;
-        background-color: #1E293B;
-        color: #E2E8F0;
+        background-color: #FFFFFF;
+        color: #1E293B;
+        border: 1px solid #E2E8F0;
     }
     
     /* Divider */
@@ -166,32 +241,104 @@ st.markdown("""
         margin: 2rem 0;
         border: none;
         height: 2px;
-        background: linear-gradient(90deg, transparent, #8B5CF6, transparent);
+        background: linear-gradient(90deg, transparent, #0066CC, #F7A800, #6B2C91, transparent);
     }
     
     /* Section headers */
     h1, h2, h3, h4, h5, h6 {
-        color: #E2E8F0 !important;
+        color: #1E293B !important;
         font-weight: 700;
+    }
+    
+    h2 {
+        border-bottom: 2px solid #0066CC;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
     }
     
     /* Text color */
     p, span, div, label {
-        color: #E2E8F0;
+        color: #1E293B;
     }
     
     /* Input fields */
     .stTextInput > div > div > input,
     .stSelectbox > div > div > div,
     .stMultiSelect > div > div > div {
-        background-color: #1E293B;
-        color: #E2E8F0;
-        border-color: #475569;
+        background-color: #FFFFFF;
+        color: #1E293B;
+        border: 1px solid #E2E8F0;
+        border-radius: 8px;
+    }
+    
+    .stTextInput > div > div > input:focus,
+    .stSelectbox > div > div > div:focus {
+        border-color: #0066CC;
+        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+    }
+    
+    /* Multiselect tags/pills */
+    .stMultiSelect span[data-baseweb="tag"] {
+        background-color: #0066CC !important;
+        color: #FFFFFF !important;
+    }
+    
+    .stMultiSelect span[data-baseweb="tag"] * {
+        color: #FFFFFF !important;
+    }
+    
+    .stMultiSelect [role="button"] {
+        color: #FFFFFF !important;
     }
     
     /* Slider */
     .stSlider > div > div > div {
-        background-color: #1E293B;
+        background-color: #F8FAFC;
+    }
+    
+    .stSlider > div > div > div > div {
+        background-color: #0066CC;
+    }
+    
+    /* Chat messages */
+    .stChatMessage {
+        background-color: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-radius: 12px;
+        padding: 1rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Number input */
+    .stNumberInput > div > div > input {
+        background-color: #FFFFFF;
+        color: #1E293B;
+        border: 1px solid #E2E8F0;
+        border-radius: 8px;
+    }
+    
+    /* Expander */
+    .streamlit-expanderHeader {
+        background-color: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        border-radius: 8px;
+    }
+    
+    /* Accent elements */
+    .stProgress > div > div > div {
+        background-color: #0066CC;
+    }
+    
+    /* Links */
+    a {
+        color: #0066CC;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    a:hover {
+        color: #003366;
+        text-decoration: underline;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -285,28 +432,28 @@ def customer_360_view(df):
         <div class="info-card">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                 <div>
-                    <p style="color: #94A3B8; font-size: 0.875rem; margin: 0;">Customer ID</p>
-                    <p style="color: #E2E8F0; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{customer['customer_id']}</p>
+                    <p style="color: #64748B; font-size: 0.875rem; margin: 0;">Customer ID</p>
+                    <p style="color: #1E293B; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{customer['customer_id']}</p>
                 </div>
                 <div>
-                    <p style="color: #94A3B8; font-size: 0.875rem; margin: 0;">Age</p>
-                    <p style="color: #E2E8F0; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{int(customer['age'])} years</p>
+                    <p style="color: #64748B; font-size: 0.875rem; margin: 0;">Age</p>
+                    <p style="color: #1E293B; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{int(customer['age'])} years</p>
                 </div>
                 <div>
-                    <p style="color: #94A3B8; font-size: 0.875rem; margin: 0;">Employment</p>
-                    <p style="color: #E2E8F0; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{customer['employment_type']}</p>
+                    <p style="color: #64748B; font-size: 0.875rem; margin: 0;">Employment</p>
+                    <p style="color: #1E293B; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{customer['employment_type']}</p>
                 </div>
                 <div>
-                    <p style="color: #94A3B8; font-size: 0.875rem; margin: 0;">Monthly Income</p>
-                    <p style="color: #E2E8F0; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{format_currency(customer['monthly_income'])}</p>
+                    <p style="color: #64748B; font-size: 0.875rem; margin: 0;">Monthly Income</p>
+                    <p style="color: #1E293B; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{format_currency(customer['monthly_income'])}</p>
                 </div>
                 <div>
-                    <p style="color: #94A3B8; font-size: 0.875rem; margin: 0;">Location</p>
-                    <p style="color: #E2E8F0; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{customer['city']} ({customer['city_tier']})</p>
+                    <p style="color: #64748B; font-size: 0.875rem; margin: 0;">Location</p>
+                    <p style="color: #1E293B; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{customer['city']} ({customer['city_tier']})</p>
                 </div>
                 <div>
-                    <p style="color: #94A3B8; font-size: 0.875rem; margin: 0;">Segment</p>
-                    <p style="color: #8B5CF6; font-size: 1.125rem; font-weight: 700; margin: 0.25rem 0;">{customer['segment']}</p>
+                    <p style="color: #64748B; font-size: 0.875rem; margin: 0;">Segment</p>
+                    <p style="color: #6B2C91; font-size: 1.125rem; font-weight: 700; margin: 0.25rem 0;">{customer['segment']}</p>
                 </div>
             </div>
         </div>
@@ -318,28 +465,28 @@ def customer_360_view(df):
         <div class="info-card">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                 <div>
-                    <p style="color: #94A3B8; font-size: 0.875rem; margin: 0;">Ticket Size</p>
-                    <p style="color: #E2E8F0; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{format_currency(customer['pl_ticket_size'])}</p>
+                    <p style="color: #64748B; font-size: 0.875rem; margin: 0;">Ticket Size</p>
+                    <p style="color: #1E293B; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{format_currency(customer['pl_ticket_size'])}</p>
                 </div>
                 <div>
-                    <p style="color: #94A3B8; font-size: 0.875rem; margin: 0;">Tenure</p>
-                    <p style="color: #E2E8F0; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{int(customer['pl_tenure_months'])} months</p>
+                    <p style="color: #64748B; font-size: 0.875rem; margin: 0;">Tenure</p>
+                    <p style="color: #1E293B; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{int(customer['pl_tenure_months'])} months</p>
                 </div>
                 <div>
-                    <p style="color: #94A3B8; font-size: 0.875rem; margin: 0;">Vintage</p>
-                    <p style="color: #E2E8F0; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{int(customer['pl_vintage_months'])} months</p>
+                    <p style="color: #64748B; font-size: 0.875rem; margin: 0;">Vintage</p>
+                    <p style="color: #1E293B; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{int(customer['pl_vintage_months'])} months</p>
                 </div>
                 <div>
-                    <p style="color: #94A3B8; font-size: 0.875rem; margin: 0;">DPD (Last 12M)</p>
-                    <p style="color: {'#10B981' if customer['dpd_last_12m'] == 0 else '#EF4444'}; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{int(customer['dpd_last_12m'])} days</p>
+                    <p style="color: #64748B; font-size: 0.875rem; margin: 0;">DPD (Last 12M)</p>
+                    <p style="color: {'#00A651' if customer['dpd_last_12m'] == 0 else '#DC2626'}; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{int(customer['dpd_last_12m'])} days</p>
                 </div>
                 <div>
-                    <p style="color: #94A3B8; font-size: 0.875rem; margin: 0;">FOIR</p>
-                    <p style="color: {'#10B981' if customer['foir_percent'] < 40 else '#EF4444'}; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{customer['foir_percent']:.1f}%</p>
+                    <p style="color: #64748B; font-size: 0.875rem; margin: 0;">FOIR</p>
+                    <p style="color: {'#00A651' if customer['foir_percent'] < 40 else '#DC2626'}; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{customer['foir_percent']:.1f}%</p>
                 </div>
                 <div>
-                    <p style="color: #94A3B8; font-size: 0.875rem; margin: 0;">Repayment Score</p>
-                    <p style="color: #E2E8F0; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{customer['repayment_score']:.0f}/100</p>
+                    <p style="color: #64748B; font-size: 0.875rem; margin: 0;">Repayment Score</p>
+                    <p style="color: #1E293B; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{customer['repayment_score']:.0f}/100</p>
                 </div>
             </div>
         </div>
@@ -351,16 +498,16 @@ def customer_360_view(df):
         <div class="info-card">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                 <div>
-                    <p style="color: #94A3B8; font-size: 0.875rem; margin: 0;">Digital Score</p>
-                    <p style="color: #E2E8F0; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{customer['digital_engagement_score']:.0f}/100</p>
+                    <p style="color: #64748B; font-size: 0.875rem; margin: 0;">Digital Score</p>
+                    <p style="color: #1E293B; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{customer['digital_engagement_score']:.0f}/100</p>
                 </div>
                 <div>
-                    <p style="color: #94A3B8; font-size: 0.875rem; margin: 0;">App Logins (90d)</p>
-                    <p style="color: #E2E8F0; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{int(customer['app_logins_90d'])}</p>
+                    <p style="color: #64748B; font-size: 0.875rem; margin: 0;">App Logins (90d)</p>
+                    <p style="color: #1E293B; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{int(customer['app_logins_90d'])}</p>
                 </div>
                 <div style="grid-column: 1 / -1;">
-                    <p style="color: #94A3B8; font-size: 0.875rem; margin: 0;">HL Calculator Used</p>
-                    <p style="color: {'#10B981' if customer['hl_calculator_used'] else '#EF4444'}; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{'✅ Yes - Strong Intent Signal!' if customer['hl_calculator_used'] else '❌ No'}</p>
+                    <p style="color: #64748B; font-size: 0.875rem; margin: 0;">HL Calculator Used</p>
+                    <p style="color: {'#00A651' if customer['hl_calculator_used'] else '#DC2626'}; font-size: 1.125rem; font-weight: 600; margin: 0.25rem 0;">{'✅ Yes - Strong Intent Signal!' if customer['hl_calculator_used'] else '❌ No'}</p>
                 </div>
             </div>
         </div>
@@ -377,14 +524,14 @@ def customer_360_view(df):
             mode="gauge+number+delta",
             value=propensity,
             domain={'x': [0, 1], 'y': [0, 1]},
-            title={'text': "HL Propensity Score", 'font': {'size': 24, 'color': '#1E3A8A'}},
-            delta={'reference': df['model_propensity_score'].mean(), 'increasing': {'color': "#10B981"}},
+            title={'text': "HL Propensity Score", 'font': {'size': 24, 'color': '#0066CC'}},
+            delta={'reference': df['model_propensity_score'].mean(), 'increasing': {'color': "#00A651"}},
             gauge={
-                'axis': {'range': [None, 100], 'tickwidth': 2, 'tickcolor': "#6B2C91"},
-                'bar': {'color': "#6B2C91", 'thickness': 0.75},
-                'bgcolor': "white",
+                'axis': {'range': [None, 100], 'tickwidth': 2, 'tickcolor': "#0066CC"},
+                'bar': {'color': "#0066CC", 'thickness': 0.75},
+                'bgcolor': "#F8FAFC",
                 'borderwidth': 2,
-                'bordercolor': "#E5E7EB",
+                'bordercolor': "#E2E8F0",
                 'steps': [
                     {'range': [0, 30], 'color': "#FEE2E2"},
                     {'range': [30, 50], 'color': "#FEF3C7"},
@@ -392,7 +539,7 @@ def customer_360_view(df):
                     {'range': [70, 100], 'color': "#A7F3D0"}
                 ],
                 'threshold': {
-                    'line': {'color': "#D4AF37", 'width': 4},
+                    'line': {'color': "#F7A800", 'width': 4},
                     'thickness': 0.75,
                     'value': 70
                 }
@@ -401,8 +548,8 @@ def customer_360_view(df):
         
         fig.update_layout(
             height=350,
-            paper_bgcolor="#0F172A",
-            font={'color': "#E2E8F0", 'family': "Arial"}
+            paper_bgcolor="#FFFFFF",
+            font={'color': "#1E293B", 'family': "Arial"}
         )
         st.plotly_chart(fig, use_container_width=True)
         
@@ -412,13 +559,13 @@ def customer_360_view(df):
             ticket_size = min(customer['monthly_income'] * 60, 5000000)
             action_html = f"""
             <div class="success-card">
-                <h3 style="color: #D1FAE5; margin: 0 0 1rem 0;">🎯 High Priority Target</h3>
-                <div style="background: #0F172A; padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 1px solid #334155;">
-                    <p style="margin: 0.5rem 0; color: #E2E8F0;"><strong>💰 Offer:</strong> Pre-approved Home Loan up to {format_currency(ticket_size)}</p>
-                    <p style="margin: 0.5rem 0; color: #E2E8F0;"><strong>📱 Channel:</strong> RM Call + WhatsApp</p>
-                    <p style="margin: 0.5rem 0; color: #E2E8F0;"><strong>⏰ Timing:</strong> Within 7 days</p>
-                    <p style="margin: 0.5rem 0; color: #E2E8F0;"><strong>💬 Script:</strong> "Your excellent repayment history qualifies you for our best HL rates at 8.5% p.a."</p>
-                    <p style="margin: 0.5rem 0; color: #E2E8F0;"><strong>🎁 Incentive:</strong> Waive processing fee (₹10,000 value)</p>
+                <h3 style="color: #00A651; margin: 0 0 1rem 0;">🎯 High Priority Target</h3>
+                <div style="background: #F8FAFC; padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 1px solid #E2E8F0;">
+                    <p style="margin: 0.5rem 0; color: #1E293B;"><strong>💰 Offer:</strong> Pre-approved Home Loan up to {format_currency(ticket_size)}</p>
+                    <p style="margin: 0.5rem 0; color: #1E293B;"><strong>📱 Channel:</strong> RM Call + WhatsApp</p>
+                    <p style="margin: 0.5rem 0; color: #1E293B;"><strong>⏰ Timing:</strong> Within 7 days</p>
+                    <p style="margin: 0.5rem 0; color: #1E293B;"><strong>💬 Script:</strong> "Your excellent repayment history qualifies you for our best HL rates at 8.5% p.a."</p>
+                    <p style="margin: 0.5rem 0; color: #1E293B;"><strong>🎁 Incentive:</strong> Waive processing fee (₹10,000 value)</p>
                 </div>
             </div>
             """
@@ -426,12 +573,12 @@ def customer_360_view(df):
         elif propensity >= 50:
             action_html = """
             <div class="warning-card">
-                <h3 style="color: #FEF3C7; margin: 0 0 1rem 0;">📞 Medium Priority</h3>
-                <div style="background: #0F172A; padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 1px solid #334155;">
-                    <p style="margin: 0.5rem 0; color: #E2E8F0;"><strong>💰 Offer:</strong> Home Loan eligibility check</p>
-                    <p style="margin: 0.5rem 0; color: #E2E8F0;"><strong>📱 Channel:</strong> App Push + SMS</p>
-                    <p style="margin: 0.5rem 0; color: #E2E8F0;"><strong>⏰ Timing:</strong> Within 14 days</p>
-                    <p style="margin: 0.5rem 0; color: #E2E8F0;"><strong>💬 Message:</strong> "Check your Home Loan eligibility in 2 minutes"</p>
+                <h3 style="color: #F7A800; margin: 0 0 1rem 0;">📞 Medium Priority</h3>
+                <div style="background: #F8FAFC; padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 1px solid #E2E8F0;">
+                    <p style="margin: 0.5rem 0; color: #1E293B;"><strong>💰 Offer:</strong> Home Loan eligibility check</p>
+                    <p style="margin: 0.5rem 0; color: #1E293B;"><strong>📱 Channel:</strong> App Push + SMS</p>
+                    <p style="margin: 0.5rem 0; color: #1E293B;"><strong>⏰ Timing:</strong> Within 14 days</p>
+                    <p style="margin: 0.5rem 0; color: #1E293B;"><strong>💬 Message:</strong> "Check your Home Loan eligibility in 2 minutes"</p>
                 </div>
             </div>
             """
@@ -439,11 +586,11 @@ def customer_360_view(df):
         elif propensity >= 30:
             action_html = """
             <div class="info-card">
-                <h3 style="color: #E2E8F0; margin: 0 0 1rem 0;">📧 Nurture Campaign</h3>
-                <div style="background: #0F172A; padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 1px solid #334155;">
-                    <p style="margin: 0.5rem 0; color: #E2E8F0;"><strong>💰 Offer:</strong> HL calculator + educational content</p>
-                    <p style="margin: 0.5rem 0; color: #E2E8F0;"><strong>📱 Channel:</strong> Email + App banner</p>
-                    <p style="margin: 0.5rem 0; color: #E2E8F0;"><strong>⏰ Timing:</strong> Monthly touchpoints</p>
+                <h3 style="color: #1E293B; margin: 0 0 1rem 0;">📧 Nurture Campaign</h3>
+                <div style="background: #F8FAFC; padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 1px solid #E2E8F0;">
+                    <p style="margin: 0.5rem 0; color: #1E293B;"><strong>💰 Offer:</strong> HL calculator + educational content</p>
+                    <p style="margin: 0.5rem 0; color: #1E293B;"><strong>📱 Channel:</strong> Email + App banner</p>
+                    <p style="margin: 0.5rem 0; color: #1E293B;"><strong>⏰ Timing:</strong> Monthly touchpoints</p>
                 </div>
             </div>
             """
@@ -494,18 +641,18 @@ def segment_analysis(df):
                 color='Avg_Propensity',
                 text='Count',
                 title="<b>Customer Count by Segment</b>",
-                color_continuous_scale='Purples'
+                color_continuous_scale=[[0, '#003366'], [0.5, '#0066CC'], [1, '#6B2C91']]
             )
             fig.update_traces(textposition='outside', textfont_size=14)
             fig.update_layout(
-                plot_bgcolor='#0F172A',
-                paper_bgcolor='#0F172A',
-                font=dict(size=12, color='#E2E8F0'),
-                title_font=dict(size=18, color='#E2E8F0'),
+                plot_bgcolor='#FFFFFF',
+                paper_bgcolor='#FFFFFF',
+                font=dict(size=12, color='#1E293B'),
+                title_font=dict(size=18, color='#1E293B'),
                 xaxis_title="Segment",
                 yaxis_title="Number of Customers",
-                xaxis=dict(gridcolor='#334155'),
-                yaxis=dict(gridcolor='#334155')
+                xaxis=dict(gridcolor='#E2E8F0'),
+                yaxis=dict(gridcolor='#E2E8F0')
             )
             st.plotly_chart(fig, use_container_width=True)
         
@@ -517,18 +664,18 @@ def segment_analysis(df):
                 text=segment_stats['Conv_Rate'].apply(lambda x: f"{x*100:.1f}%"),
                 title="<b>Conversion Rate by Segment</b>",
                 color='Conv_Rate',
-                color_continuous_scale='Tealgrn'
+                color_continuous_scale=[[0, '#003366'], [0.5, '#00A651'], [1, '#0066CC']]
             )
             fig.update_traces(textposition='outside', textfont_size=14)
             fig.update_layout(
-                plot_bgcolor='#0F172A',
-                paper_bgcolor='#0F172A',
-                font=dict(size=12, color='#E2E8F0'),
-                title_font=dict(size=18, color='#E2E8F0'),
+                plot_bgcolor='#FFFFFF',
+                paper_bgcolor='#FFFFFF',
+                font=dict(size=12, color='#1E293B'),
+                title_font=dict(size=18, color='#1E293B'),
                 xaxis_title="Segment",
                 yaxis_title="Conversion Rate",
-                xaxis=dict(gridcolor='#334155'),
-                yaxis=dict(gridcolor='#334155')
+                xaxis=dict(gridcolor='#E2E8F0'),
+                yaxis=dict(gridcolor='#E2E8F0')
             )
             st.plotly_chart(fig, use_container_width=True)
     
@@ -541,18 +688,18 @@ def segment_analysis(df):
                 x='model_propensity_score',
                 nbins=50,
                 title="<b>Propensity Score Distribution</b>",
-                color_discrete_sequence=['#6B2C91']
+                color_discrete_sequence=['#0066CC']
             )
             fig.update_layout(
-                plot_bgcolor='#0F172A',
-                paper_bgcolor='#0F172A',
-                font=dict(size=12, color='#E2E8F0'),
-                title_font=dict(size=18, color='#E2E8F0'),
+                plot_bgcolor='#FFFFFF',
+                paper_bgcolor='#FFFFFF',
+                font=dict(size=12, color='#1E293B'),
+                title_font=dict(size=18, color='#1E293B'),
                 xaxis_title="Propensity Score",
                 yaxis_title="Number of Customers",
                 showlegend=False,
-                xaxis=dict(gridcolor='#334155'),
-                yaxis=dict(gridcolor='#334155')
+                xaxis=dict(gridcolor='#E2E8F0'),
+                yaxis=dict(gridcolor='#E2E8F0')
             )
             st.plotly_chart(fig, use_container_width=True)
         
@@ -563,18 +710,18 @@ def segment_analysis(df):
                 y='model_propensity_score',
                 title="<b>Propensity Score by Segment</b>",
                 color='segment',
-                color_discrete_sequence=['#6B2C91', '#1E3A8A', '#D4AF37', '#10B981']
+                color_discrete_sequence=['#0066CC', '#6B2C91', '#F7A800', '#00A651']
             )
             fig.update_layout(
-                plot_bgcolor='#0F172A',
-                paper_bgcolor='#0F172A',
-                font=dict(size=12, color='#E2E8F0'),
-                title_font=dict(size=18, color='#E2E8F0'),
+                plot_bgcolor='#FFFFFF',
+                paper_bgcolor='#FFFFFF',
+                font=dict(size=12, color='#1E293B'),
+                title_font=dict(size=18, color='#1E293B'),
                 xaxis_title="Segment",
                 yaxis_title="Propensity Score",
                 showlegend=False,
-                xaxis=dict(gridcolor='#334155'),
-                yaxis=dict(gridcolor='#334155')
+                xaxis=dict(gridcolor='#E2E8F0'),
+                yaxis=dict(gridcolor='#E2E8F0')
             )
             st.plotly_chart(fig, use_container_width=True)
     
@@ -604,7 +751,7 @@ def segment_analysis(df):
                 x=decile_analysis['propensity_decile'],
                 y=decile_analysis['Conv_Rate'] * 100,
                 name='Conversion Rate',
-                marker_color='#6B2C91',
+                marker_color='#0066CC',
                 text=decile_analysis['Conv_Rate'].apply(lambda x: f"{x*100:.1f}%"),
                 textposition='outside'
             ),
@@ -616,7 +763,7 @@ def segment_analysis(df):
                 x=decile_analysis['propensity_decile'],
                 y=decile_analysis['Lift'],
                 name='Lift',
-                marker_color='#10B981',
+                marker_color='#00A651',
                 text=decile_analysis['Lift'].apply(lambda x: f"{x:.1f}x"),
                 textposition='outside'
             ),
@@ -633,13 +780,6 @@ def segment_analysis(df):
         fig.update_layout(
             height=450,
             showlegend=False,
-            plot_bgcolor='#0F172A',
-            paper_bgcolor='#0F172A',
-            font=dict(size=12, color='#E2E8F0'),
-            xaxis=dict(gridcolor='#334155'),
-            yaxis=dict(gridcolor='#334155'),
-            xaxis2=dict(gridcolor='#334155'),
-            yaxis2=dict(gridcolor='#334155')
         )
         st.plotly_chart(fig, use_container_width=True)
         
@@ -665,18 +805,18 @@ def segment_analysis(df):
                 title="<b>Conversion Rate by Age Band</b>",
                 labels={'x': 'Age Band', 'y': 'Conversion Rate (%)'},
                 color=age_conv.values,
-                color_continuous_scale='Purples',
+                color_continuous_scale=[[0, '#003366'], [0.5, '#0066CC'], [1, '#6B2C91']],
                 text=age_conv.values.round(1)
             )
             fig.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
             fig.update_layout(
-                plot_bgcolor='#0F172A',
-                paper_bgcolor='#0F172A',
-                title_font=dict(size=18, color='#E2E8F0'),
+                plot_bgcolor='#FFFFFF',
+                paper_bgcolor='#FFFFFF',
+                title_font=dict(size=18, color='#1E293B'),
                 showlegend=False,
-                font=dict(color='#E2E8F0'),
-                xaxis=dict(gridcolor='#334155'),
-                yaxis=dict(gridcolor='#334155')
+                font=dict(color='#1E293B'),
+                xaxis=dict(gridcolor='#E2E8F0'),
+                yaxis=dict(gridcolor='#E2E8F0')
             )
             st.plotly_chart(fig, use_container_width=True)
         
@@ -689,18 +829,18 @@ def segment_analysis(df):
                 title="<b>Conversion Rate by City Tier</b>",
                 labels={'x': 'City Tier', 'y': 'Conversion Rate (%)'},
                 color=city_conv.values,
-                color_continuous_scale='Tealgrn',
+                color_continuous_scale=[[0, '#003366'], [0.5, '#00A651'], [1, '#0066CC']],
                 text=city_conv.values.round(1)
             )
             fig.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
             fig.update_layout(
-                plot_bgcolor='#0F172A',
-                paper_bgcolor='#0F172A',
-                title_font=dict(size=18, color='#E2E8F0'),
+                plot_bgcolor='#FFFFFF',
+                paper_bgcolor='#FFFFFF',
+                title_font=dict(size=18, color='#1E293B'),
                 showlegend=False,
-                font=dict(color='#E2E8F0'),
-                xaxis=dict(gridcolor='#334155'),
-                yaxis=dict(gridcolor='#334155')
+                font=dict(color='#1E293B'),
+                xaxis=dict(gridcolor='#E2E8F0'),
+                yaxis=dict(gridcolor='#E2E8F0')
             )
             st.plotly_chart(fig, use_container_width=True)
 
@@ -844,16 +984,16 @@ def campaign_simulator(df):
                 color='Avg_Propensity',
                 text='Targets',
                 title="<b>Target Distribution by Segment</b>",
-                color_continuous_scale='Purples'
+                color_continuous_scale=[[0, '#003366'], [0.5, '#0066CC'], [1, '#6B2C91']]
             )
             fig.update_traces(textposition='outside', textfont_size=14)
             fig.update_layout(
-                plot_bgcolor='#0F172A',
-                paper_bgcolor='#0F172A',
-                title_font=dict(size=18, color='#E2E8F0'),
-                font=dict(color='#E2E8F0'),
-                xaxis=dict(gridcolor='#334155'),
-                yaxis=dict(gridcolor='#334155')
+                plot_bgcolor='#FFFFFF',
+                paper_bgcolor='#FFFFFF',
+                title_font=dict(size=18, color='#1E293B'),
+                font=dict(color='#1E293B'),
+                xaxis=dict(gridcolor='#E2E8F0'),
+                yaxis=dict(gridcolor='#E2E8F0')
             )
             st.plotly_chart(fig, use_container_width=True)
             
